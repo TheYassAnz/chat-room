@@ -6,3 +6,7 @@ class Room(models.Model):
     name = models.CharField(max_length=50, null=False)
     creation_date = models.DateTimeField(auto_now_add=True)
     
+class Post(models.Model):
+    text = models.TextField()
+    creation_date = models.DateTimeField(auto_now_add=True)
+    room = models.ForeignKey(Room, on_delete=models.CASCADE)
