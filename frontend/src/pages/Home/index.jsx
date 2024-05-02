@@ -1,44 +1,25 @@
 import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 function Home() {
     const navigate = useNavigate()
-    const rooms = [
-        {
-            code: 'HSS3KSL',
-            name: 'Room 1',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        },
-        {
-            code: 'HSKBD3SL',
-            name: 'Room 2',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    const [rooms, setRooms] = useState([])
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await fetch('http://localhost:8000/api/rooms')
+                .then((response) => response.json())
+                .catch((error) => console.error(error))
 
-        },
-        {
-            code: 'HZ80SKSL',
-            name: 'Room 3',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-
-        },
-        {
-            code: 'HSK093SL',
-            name: 'Room 4',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-
-        },
-        {
-            code: 'H379KSL',
-            name: 'Room 5',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-
-        },]
+            setRooms(response)
+        }
+        fetchData()
+    }, [])
 
     function handleClick(event, room) {
         event.preventDefault();
         console.log(`Discuter sur ${room.code}`)
         navigate(`/room/${room.code}`)
     }
-
     return (
         <>
             <div className="xl:mx-96 md:mx-56 sm:mx-32 mx-8 mt-12">
