@@ -5,6 +5,7 @@ import {
     Navigate,
 } from "react-router-dom";
 
+import Home from "../pages/Home"
 import Room from "../pages/Room"
 
 const router = createBrowserRouter(
@@ -13,7 +14,8 @@ const router = createBrowserRouter(
             path="/"
         >
             <Route index element={<Navigate to='rooms' />} />
-            <Route path='rooms' element={<Room />} />
+            <Route path='rooms' element={<Home />} />
+            <Route path='room/:code' element={<Room />} />
         </Route>
     )
 );
